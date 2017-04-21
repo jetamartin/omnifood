@@ -237,11 +237,6 @@ input[type=submit]:active {
 
 /*--------------------------------------------*/
 
-header {
-    background-attachment: fixed;
-    /* For Parallax effect for header image */
-}
-
 /* Used "Fixed Height Method" for achieving fluid image instead of "Scaled Height Method. */
 /* Scaled Height Method would reducs cropping of hero image as you size down viewport but it also */
 /* creates some formatting issues because image height scales down as you shrink viewport */
@@ -251,6 +246,7 @@ header {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(88, 81, 81, 0.7)), url(img/hero-min.jpg);
     background-size: cover;
     background-position: center;
+    background-attachment: fixed; /* For Parallax effect for header image */
     /* Each unit of viewport height represents 1% of viewport height...so here image always consume 100% of viewport height..which is what we want for this hero image..all other content starts on page 2 */
     height: 100vh;
     /* To use Scale height method comment out height line above and uncomment two lines below */
