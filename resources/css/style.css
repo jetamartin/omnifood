@@ -62,12 +62,8 @@ body {
 
 
 /* Note normally you would use margin to create separation between elements */
-
-
 /* however in this case we will want some section elements to have a background color */
-
-
-/* so we have to use padding to get that color. */
+/* so we have to use padding. If were to use margin instead the separaton added here would be white instead of color */
 
 section {
     padding: 80px 0;
@@ -126,8 +122,9 @@ h3 {
 .long-copy {
     line-height: 145%;
     width: 70%;
-    margin-left: 15%;
-    /* 30% left so 15% margin-left will cause it to be centered */
+    /* margin-left: 15%;*/ /* 30% left so 15% margin-left will cause it to be centered */
+    margin: 0 auto;
+    
 }
 
 .box p {
@@ -151,12 +148,12 @@ h3 {
     width: 30px;
     text-align: left;
     color: #e67e22;
-    font-size: 120%;
+    margin-top: -6px;
     margin-right: 10px;
     /* secrets to align text and icons */
     line-height: 145%;
     vertical-align: middle;
-    margin-top: -6px;
+    font-size: 120%;
 }
 
 
@@ -273,7 +270,7 @@ header {
 }
 
 .logo-black {
-    display: none;
+    display: none;  /* Default (sticky not present on nav element) will be to hide black version of logo */
     height: 50px;
     width: auto;
     float: left;
@@ -287,6 +284,8 @@ header {
     float: right;
     list-style: none;
     margin-top: 55px;
+    position: relative;  /* Need position to be relative so z-index can be used */
+    z-index: 999; /* Need high z-index to make sure nav elements sit in front of hero-txt and are clickable */
 }
 
 .main-nav li {
@@ -318,8 +317,8 @@ header {
 .mobile-nav-icon {
     float: right;
     margin-top: 30px;
-    cursor: pointer;
-    display: none;
+    cursor: pointer;  /* Need this because href wasn't specified */
+    display: none;    /* Only want to show mobile icon if width <= 767 so we hide it until then */
 }
 
 .mobile-nav-icon i {
@@ -334,8 +333,9 @@ header {
 
 /* Sticky navi */
 
+/* Sticky class defines what nav will look like when sticky class is added to nav element */
 .sticky {
-    position: fixed;
+    position: fixed; /* Nav will stay in same place despite scrolling */
     top: 0;
     left: 0;
     width: 100%;
@@ -343,13 +343,14 @@ header {
     box-shadow: 0 2px 2px #efefef;
     z-index: 9999;
 }
-
+/* Make nav labels grey */
 .sticky .main-nav li a:link,
 .sticky .main-nav li a:visited {
     padding: 16px 0;
     color: #555;
 }
 
+/* When sticky class is on nav element you want to hide white logo (.logo) and show black logo (.logo-black) */
 .sticky .logo {
     display: none;
 }
@@ -399,8 +400,7 @@ header {
     width: 100%;
     margin: 0;
     overflow: hidden;
-    background-color: #000;
-    /* create a black background behind image */
+    background-color: #000; /* create a black background behind image */
 }
 
 .meal-photo img {
@@ -438,17 +438,18 @@ header {
 .section-steps {
     background-color: #efefef;
 }
+/* There will be two columns (both with class=steps-box) in this section. The first column is the iPhone image and the steps is the second column */
 
+/* iPhone image */
 .steps-box:first-child {
     margin-top: 30px;
-    text-align: right;
-    /* Text align works on iPhone img as well */
-    padding-right: 3%;
+    text-align: right; /* Text align works on iPhone img as well */
+    padding-right: 3%; /* Note: use % rather than pixel to keep layout fluid */
 }
-
+/* Detail steps */
 .steps-box:last-child {
     padding-left: 3%;
-    margin-top: 70px;
+    margin-top: 70px; /* make steps vertically aligned next to iPhone imsage */
 }
 
 .app-screen {
@@ -457,16 +458,19 @@ header {
 
 .works-step {
     margin-bottom: 50px;
+    position: relative;
 }
 
-.works-step:last-of-type {
+/* Need separation between 3rd step and Apple and Android buttons. Pseudo class:last-of-type used to target 3rd step */
+.works-step:last-of-type { 
     margin-bottom: 80px;
 }
 
+/* Create circle around step # */
 .works-step div {
     color: #e67e22;
-    border: 2px solid #e67e22;
-    display: inline-block;
+/*    display: inline-block;*/
+    border: 2px solid #e67e22; 
     border-radius: 50%;
     height: 55px;
     width: 55px;
@@ -475,6 +479,14 @@ header {
     float: left;
     font-size: 150%;
     margin-right: 25px;
+}
+
+.works-step p {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 75px;
 }
 
 .btn-app:link {
@@ -606,8 +618,7 @@ cite img {
 }
 
 .plan-price span {
-    font-size: 30%;
-    /* Must set to small % because it's inheriting from parent .plan-price which we set to 300% */
+    font-size: 30%; /* Must set to small % because it's inheriting from parent .plan-price which we set to 300% */    
     font-weight: 300;
 }
 
@@ -708,7 +719,14 @@ footer {
 .social-links li {
     display: inline-block;
     margin-right: 20px;
-    margin-top: 16px;
+}
+.social-links li {
+    margin-top: 0;
+}
+
+/* Needed to make social icons line up with other footer nav */
+footer div div:last-child {
+    margin-top: 0;
 }
 
 .footer-nav li:last-child,

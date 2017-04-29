@@ -32,7 +32,7 @@
                 <a href="#home"><img src="resources/img/logo-white.png" alt="Omnifood logo" class="logo"></a>
                 <a href="#home"><img src="resources/img/logo.png" alt="Omnifood logo" class="logo-black"></a>
                 <ul class="main-nav js--main-nav">
-                    <li><a href="#features">Food delivery</a></li>
+                    <li><a id="js--features" href="#features">Food delivery</a></li>
                     <li><a href="#steps">How it works</a></li>
                     <li><a href="#cities">Our cities</a></li>
                     <li><a href="#plans">Sign up</a></li>
@@ -89,6 +89,7 @@
         </div>
     </section>
     <section class="section-meals">
+        <!--  li child elements are floated so clearfix:after must be applied to parent so that parent (section-meals ) will wrap around child elements (ul) otherwise section-meals height = 0 and section below it (section-steps) will overlap section-meals -->
         <ul class="meals-showcase clearfix">
             <li>
                 <figure class="meal-photo">
@@ -143,15 +144,15 @@
                 <img src="resources/img/app-iPhone.png" alt="OmniFood app on iphone" class="app-screen">
             </div>
             <div class="col span-1-of-2 steps-box">
-                <div class="works-step">
+                <div class="works-step clearfix">
                     <div class="step-number">1</div>
                     <p>Choose the subscription plan that best fits your needs and sign up today.</p>
                 </div>
-                <div class="works-step">
+                <div class="works-step clearfix">
                     <div class="step-number">2</div>
                     <p>Order your delicious meal using our mobile app or website. Or you can even call us!</p>
                 </div>
-                <div class="works-step">
+                <div class="works-step clearfix">
                     <div class="step-number">3</div>
                     <p>Enjoy your meal after less than 20 minutes. See you the next time!</p>
                 </div>
@@ -373,7 +374,7 @@
         </div>
     </div>
     <footer>
-        <div class="row">
+        <div class="row clearfix">
             <div class="col span-1-of-2">
 
                 <ul class="footer-nav">
@@ -417,8 +418,3 @@
 
 
 </html>
-<!--
-
-
-
--->

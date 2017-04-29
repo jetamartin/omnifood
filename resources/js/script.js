@@ -2,7 +2,9 @@ $(document).ready(function () {
 
     /* For sticky navigation */
     /* Uses Waypoint plugin (imakewebthings.com) */
-
+    
+    /* This code adds the 'sticky' class to the nav element if we get to js--section-features and scroll direction is down */
+    /* This code removes the 'sticky' class from the nav element if we get to js--section-features and scroll direction is up */
     $('.js--section-features').waypoint(function (direction) {
         if (direction == "down") {
             $('nav').addClass('sticky');
@@ -41,12 +43,12 @@ $(document).ready(function () {
     });
 
 
-    $('.js--scroll-to-form').click(function () {
+    $('#features').click(function () {
         $('html, body').animate({
             scrollTop: $('.js--section-form').offset().top - 60
         }, 1000);
     });
-
+    
     /* Smooth Scroll for navigation links */
     /* https://css-tricks.com/snippets/jquery/smooth-scrolling/ */
     $(function () {
@@ -56,7 +58,7 @@ $(document).ready(function () {
                 target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
                 if (target.length) {
                     $('html, body').animate({
-                        scrollTop: target.offset().top - 60
+                        scrollTop: target.offset().top - 60  /* Add '- 60' offset to give room for nav bar to appear */
                     }, 1000);
                     return false;
                 }
@@ -71,7 +73,7 @@ $(document).ready(function () {
     $('.js--wp-1').waypoint(function (direction) {
         $('.js--wp-1').addClass('animated fadeIn');
     }, {
-        offset: '50%'
+        offset: '50%' /* want to have animation start before you scroll to element..in this case offset b 50% */
     });
 
     $('.js--wp-2').waypoint(function (direction) {
@@ -90,21 +92,66 @@ $(document).ready(function () {
         offset: '50%'
     });
 
-    /* Mobile Navi */
-    $('.js--nav-icon').click(function () {
-        var nav = $('.js--main-nav');
-        var icon = $('.js--nav-icon i')
-        nav.slideToggle(200);
-
+    /* Mobile Navi: Manual close */
+    /* With this code the nav menu you will stay open until the user manually closes it. */
+//    $('.js--nav-icon').click(function () {
+//        var nav = $('.js--main-nav');
+//        var icon = $('.js--nav-icon i');
+//        nav.slideToggle(200);
+//
+//        if (icon.hasClass('ion-navicon-round')) {
+//            icon.addClass('ion-close-round');
+//            icon.removeClass('ion-navicon-round');
+//        } else {
+//            icon.addClass('ion-navicon-round');
+//            icon.removeClass('ion-close-round');
+//        }
+//
+//    });
+    
+    /* Mobile Navi: Auto close */
+    /* With this code the nav menu you will stay open until the user manually closes it. */
+    var nav = $('.js--main-nav');
+    var icon = $('.js--nav-icon i');
+    
+    /* Mobile navigation */
+    $('.js--nav-icon, .js--main-nav a, .logo-black').click(function(element){
+        //Gets the class name of the element that triggered the event
+        var clicked = element.target.className;
+        //Exits the function if the menu is closed AND the logo-black element (logo image) was clicked
+        if (icon.hasClass('ion-navicon-round') && clicked == 'logo-black')
+		{return;}
+        //Opens and closes the menu
+        if ($(window).width() < 768){
+            nav.slideToggle(100);
+        }
+        //Changes icon states of the menu button
         if (icon.hasClass('ion-navicon-round')) {
             icon.addClass('ion-close-round');
-            icon.removeClass('ion-navicon-round')
+            icon.removeClass('ion-navicon-round');
         } else {
-            icon.addClass('ion-navicon-round')
-            icon.removeClass('ion-close-round')
+            icon.addClass('ion-navicon-round');
+            icon.removeClass('ion-close-round');
         }
-
     });
+    
+    $(window).resize(function(){
+        if ($(window).width() > 767){
+            nav.css("display", "block");
+            icon.addClass('ion-close-round');
+            icon.removeClass('ion-navicon-round');
+        } else {
+            nav.css("display", "none");
+            icon.addClass('ion-navicon-round');
+            icon.removeClass('ion-close-round');
+        }
+    });
+
+
+    
+    
+    
+    
 
     /* Create a "Basic" Google map with markers */
     /* using JQuery Plugin gmaps.js @ http://hpneo.github.io/gmaps/examples/basic.html */
